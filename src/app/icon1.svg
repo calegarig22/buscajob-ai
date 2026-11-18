@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .stamp { fill: #fff; stroke: #1d3a8a; }
+    .txt { fill: #1d3a8a; }
+    @media (prefers-color-scheme: dark) {
+      .stamp { fill: #0c111c; stroke: #8fb0ff; }
+      .txt { fill: #8fb0ff; }
+    }
+  </style>
+  <g transform="rotate(-8 32 32)">
+    <rect class="stamp" x="9" y="9" width="46" height="46" rx="9" stroke-width="5"/>
+    <text class="txt" x="32" y="41" text-anchor="middle" font-family="ui-monospace, Menlo, Consolas, monospace" font-size="22" font-weight="700">BJ</text>
+  </g>
+</svg>

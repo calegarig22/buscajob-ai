@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+/* ───────────────────────── Design tokens (fonte única de verdade) ─────────────────────────
+   Componentes usam SÓ os tokens semânticos abaixo (bg-surface, text-muted, border-line...).
+   Veja DESIGN_SYSTEM.md. */
+@theme {
+  /* tipografia (pacotes @fontsource importados em layout.tsx) */
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
+
+  /* cores semânticas — tema claro ("papel frio + tinta de carimbo") */
+  --color-bg: #f3f5f9;
+  --color-surface: #ffffff;
+  --color-surface-2: #eef1f6;
+  --color-line: #dbe1ea;
+  --color-line-strong: #c3ccd9;
+  --color-fg: #141c2e;
+  --color-muted: #566176;
+  --color-ink: #1d3a8a; /* primária: tinta azul */
+  --color-ink-fg: #ffffff;
+  --color-ink-soft: #e6ecfa;
+  --color-ok: #17734a;
+  --color-ok-soft: #e3f3ea;
+  --color-warn: #9a5b00;
+  --color-warn-soft: #fbf0dc;
+  --color-danger: #b42318;
+  --color-danger-soft: #fdeceb;
+  --color-ring: #3b63d6;
+
+  /* raio, sombra, motion */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-card: 0 1px 2px rgb(20 28 46 / 0.05), 0 4px 16px -6px rgb(20 28 46 / 0.08);
+  --shadow-pop: 0 10px 30px -10px rgb(20 28 46 / 0.25);
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  --animate-stamp: stamp 380ms var(--ease-standard) both;
+  --animate-rise: rise 320ms var(--ease-standard) both;
+
+  @keyframes stamp {
+    0% { transform: rotate(-9deg) scale(1.6); opacity: 0; }
+    70% { transform: rotate(-9deg) scale(0.96); opacity: 1; }
+    100% { transform: rotate(-9deg) scale(1); opacity: 1; }
+  }
+  @keyframes rise {
+    from { transform: translateY(6px); opacity: 0; }
+    to { transform: none; opacity: 1; }
+  }
+}
+
+/* tema escuro: mesmos tokens, valores trocados */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #0c111c;
+    --color-surface: #131a28;
+    --color-surface-2: #1a2334;
+    --color-line: #253049;
+    --color-line-strong: #33415f;
+    --color-fg: #e7ecf5;
+    --color-muted: #9aa6bc;
+    --color-ink: #8fb0ff;
+    --color-ink-fg: #0c111c;
+    --color-ink-soft: #1c2a4d;
+    --color-ok: #5fd39a;
+    --color-ok-soft: #12301f;
+    --color-warn: #f2b45a;
+    --color-warn-soft: #36270f;
+    --color-danger: #ff8a80;
+    --color-danger-soft: #3a1714;
+    --color-ring: #8fb0ff;
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 4px 16px -6px rgb(0 0 0 / 0.4);
+    color-scheme: dark;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+  /* Tailwind v4 tira o cursor de mão dos botões: devolve em tudo que é clicável */
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]),
+  summary,
+  select,
+  label[for],
+  input[type="checkbox"],
+  input[type="radio"],
+  input[type="file"] {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+  ::selection {
+    background: var(--color-ink-soft);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* currículo adaptado: títulos de seção e impressão em A4 */
+.cv-h {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #1d3a8a;
+  margin-bottom: 0.35rem;
+}
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+  body {
+    background: #fff !important;
+  }
+  .no-print,
+  header.sticky {
+    display: none !important;
+  }
+  .cv-page {
+    padding: 0 !important;
+    max-width: none !important;
+  }
+  .cv {
+    border: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  .cv-block {
+    break-inside: avoid;
+  }
+}
