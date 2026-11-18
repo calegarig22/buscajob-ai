@@ -44,3 +44,9 @@ src/lib/            nota local, IA, trava anti-invenção, pipeline, sessão
 src/db/             schema Drizzle e conexão
 scripts/            migração para multiusuário (cria o admin)
 ```
+
+## Direitos autorais
+
+© 2026 Gustavo Fiedler Calegari. Todos os direitos reservados.
+
+Este código está publicado apenas para avaliação de portfólio. Não é permitido copiar, modificar, distribuir ou usar comercialmente, no todo ou em parte, sem autorização por escrito do autor.
